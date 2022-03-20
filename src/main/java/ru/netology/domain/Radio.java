@@ -1,8 +1,14 @@
 package ru.netology.domain;
 
+
 public class Radio {
-    public int currentRadioNumber;
-    public int currentVolume;
+    private int count = 10;
+    private int currentRadioNumber;
+    private int maxRadioNumber = 9;
+    private int minRadioNumber = 0;
+    private int currentVolume;
+    private int maxVolume = 100;
+    private int minVolume = 0;
 
     public int getCurrentRadioNumber() {
         return currentRadioNumber;
@@ -13,48 +19,62 @@ public class Radio {
     }
 
     public void setCurrentRadioNumber(int newCurrentRadioNumber) {
-        if (newCurrentRadioNumber < 0) {
+        if (newCurrentRadioNumber < minRadioNumber) {
             return;
         }
-        if (newCurrentRadioNumber > 9) {
+        if (newCurrentRadioNumber > maxRadioNumber) {
             return;
         }
         currentRadioNumber = newCurrentRadioNumber;
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
-        if (newCurrentVolume > 10) {
+        if (newCurrentVolume > maxVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
     }
 
-    public void nextRadioNumber() {
-        if (currentRadioNumber < 9) {
-            currentRadioNumber++;
-        } else
-            currentRadioNumber = 0;
+
+    public Radio() {
     }
 
-    public void prevRadioNumber() {
-        if (currentRadioNumber > 0) {
-            currentRadioNumber--;
+    public Radio(int count) {
+        this.count = count;
+        this.maxRadioNumber = minRadioNumber + count - 1;
+
+    }
+
+    public void nextRadioNumber() {
+        if (currentRadioNumber < maxRadioNumber) {
+            currentRadioNumber++;
         } else
-            currentRadioNumber = 9;
+            currentRadioNumber = minRadioNumber;
+    }
+
+    public int prevRadioNumber() {
+        if (currentRadioNumber > minRadioNumber) {
+            return currentRadioNumber--;
+
+        } else
+            return currentRadioNumber = maxRadioNumber;
+
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume++;
-        }
+        } else
+            currentVolume = maxVolume;
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume--;
-        }
+        } else
+            currentVolume = minVolume;
     }
 }
