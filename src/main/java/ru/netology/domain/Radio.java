@@ -1,10 +1,12 @@
 package ru.netology.domain;
 
+
 public class Radio {
-    private int currentRadioNumber = 5;
+    private int count = 10;
+    private int currentRadioNumber;
     private int maxRadioNumber = 9;
     private int minRadioNumber = 0;
-    private int currentVolume = 77;
+    private int currentVolume;
     private int maxVolume = 100;
     private int minVolume = 0;
 
@@ -16,12 +18,34 @@ public class Radio {
         return currentVolume;
     }
 
+    public void setCurrentRadioNumber(int newCurrentRadioNumber) {
+        if (newCurrentRadioNumber < minRadioNumber) {
+            return;
+        }
+        if (newCurrentRadioNumber > maxRadioNumber) {
+            return;
+        }
+        currentRadioNumber = newCurrentRadioNumber;
+    }
+
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume < minVolume) {
+            return;
+        }
+        if (newCurrentVolume > maxVolume) {
+            return;
+        }
+        currentVolume = newCurrentVolume;
+    }
+
+
     public Radio() {
     }
 
-    public Radio(int countRadioNumber, int currentRadioNumber) {
-        this.currentRadioNumber = currentRadioNumber;
-        this.maxRadioNumber = minRadioNumber + countRadioNumber - 1;
+    public Radio(int count) {
+        this.count = count;
+        this.maxRadioNumber = minRadioNumber + count - 1;
+
     }
 
     public void nextRadioNumber() {
@@ -31,15 +55,13 @@ public class Radio {
             currentRadioNumber = minRadioNumber;
     }
 
-    public void prevRadioNumber() {
+    public int prevRadioNumber() {
         if (currentRadioNumber > minRadioNumber) {
-            currentRadioNumber--;
-        } else
-            currentRadioNumber = maxRadioNumber;
-    }
+            return currentRadioNumber--;
 
-    public Radio(int currentVolume) {
-        this.currentVolume = currentVolume;
+        } else
+            return currentRadioNumber = maxRadioNumber;
+
     }
 
     public void increaseVolume() {
